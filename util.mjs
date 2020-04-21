@@ -609,4 +609,31 @@ exports.removeBOM = function(s) {
 }
 exports.unique = ar => ar.filter((cur, idx, self) => self.indexOf(cur) == idx)
 
+exports.makeGrids = function(stab) {
+  const area = []
+  let maxc = 0
+  const lines = stab.split('\n')
+	for (let a of lines) {
+    const row = a.split(' ')
+    if (row.length > 1 || row[0].length > 0) {
+      area.push(row)
+      if (row.length > maxc) {
+        maxc = row.length
+      }
+    }
+  }
+  const c = document.createElement('div')
+  c.style.display = 'grid'
+  c.style.gridTemplateColumns = `repeat(${maxc}, 1fr)`
+  c.style.gridTemplateRows = `repeat(${lines.length}, 1fr)`
+  for (const ar of area) {
+    for (const a of ar) {
+      const div = document.createElement('span')
+      c.appendChild(div)
+      div.textContent = a
+    }
+  }
+  return c
+}
+
 export default exports
