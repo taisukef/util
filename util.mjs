@@ -635,5 +635,14 @@ exports.makeGrids = function(stab) {
   }
   return c
 }
+/* for surrogate pairs */
+exports.decU = function(s) {
+	if (s == null)
+		return null
+	return s.match(/[\uD800-\uDBFF][\uDC00-\uDFFF]|[\s\S]/g) || []
+}
+exports.encU = function(uni) {
+	return uni.join("")
+}
 
 export default exports
