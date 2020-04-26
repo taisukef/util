@@ -41,7 +41,7 @@ exports.toHalf = function(s) {
 }
 exports.shuffle = function(array) {
 	for (var i = 0; i < array.length; i++) {
-		var n = rnd(array.length);
+		var n = this.rnd(array.length);
 		var tmp = array[i];
 		array[i] = array[n];
 		array[n] = tmp;
@@ -643,6 +643,22 @@ exports.decU = function(s) {
 }
 exports.encU = function(uni) {
 	return uni.join("")
+}
+/* string util */
+exports.splitString = function(s, splitters) {
+  const res = []
+  let n = 0
+  for (let i = 0; i < s.length; i++) {
+    const c = s.charAt(i)
+    if (splitters.indexOf(c) >= 0) {
+      if (i > n)
+        res.push(s.substring(n, i))
+      n = i + 1
+    }
+  }
+  if (n < s.length)
+    res.push(s.substring(n))
+  return res
 }
 
 export default exports
