@@ -523,6 +523,27 @@ exports.decodeCSV = function (s) {
   if (line.length > 0) { res.push(line) }
   return res
 }
+exports.encodeCSV = function(csvar) {
+  let s = []
+  for (let i = 0; i < csvar.length; i++) {
+    let s2 = []
+    const line = csvar[i]
+    for (let j = 0; j < line.length; j++) {
+      const v = line[j]
+      if (v == undefined || v.length == 0) {
+        s2.push("")
+      } else if (typeof v == 'number') {
+        s2.push(v)
+      } else if (v.indexOf('"') >= 0) {
+        s2.push('"' + v.replace(/\"/g, '""') + '"')
+      } else {
+        s2.push('"' + v + '"')
+      }
+    }
+    s.push(s2.join(','))
+  }
+  return s.join('\n')
+}
 exports.csv2json = function (csv) {
   const res = []
   const head = csv[0]
