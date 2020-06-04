@@ -536,8 +536,10 @@ exports.encodeCSV = function(csvar) {
         s2.push(v)
       } else if (v.indexOf('"') >= 0) {
         s2.push('"' + v.replace(/\"/g, '""') + '"')
-      } else {
+      } else if (v.indexOf(',') >= 0 || v.indexOf('\n') >= 0) {
         s2.push('"' + v + '"')
+      } else {
+        s2.push(v)
       }
     }
     s.push(s2.join(','))
