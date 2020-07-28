@@ -572,6 +572,33 @@ exports.csv2json = function (csv) {
   }
   return res
 }
+exports.json2csv = function(json) {
+  if (!Array.isArray(json)) {
+    throw 'is not array! at json2csv'
+  }
+  const head = []
+  for (const d of json) {
+    for (const name in d) {
+      if (head.indexOf(name) == -1) {
+        head.push(name)
+      }
+    }
+  }
+  const res = [ head ]
+  for (const d of json) {
+    const line = []
+    for (let i = 0; i < head.length; i++) {
+      const v = d[head[i]]
+      if (v == undefined) {
+        line.push('')
+      } else {
+        line.push(v)
+      }
+    }
+    res.push(line)
+  }
+  return res
+}
 exports.getLastDayOfMonth = function (year, month) {
   if (month === 0) {
     month = 12
