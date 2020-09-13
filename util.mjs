@@ -684,6 +684,7 @@ exports.splitString = function (s, splitters) {
   }
   if (n < s.length) { res.push(s.substring(n)) }
   return res
-}
+};
+exports.sleep = async (msec) => new Promise(resolve => setTimeout(resolve, msec));
 
 export default exports
